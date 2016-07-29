@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>DCOZ 2016 Zone Change Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.js"></script>
+ <script src="http://dcoz.dc.gov/maps/ChangeMap/leaflet-side-by-side-gh-pages/leaflet-side-by-side.js"></script>
+    <!-- Esri Leaflet -->
+    <script src="https://cdn.jsdelivr.net/leaflet.esri/2.0.1/esri-leaflet.js"></script>
+    <!-- Esri Leaflet Geocoder -->
+<link rel="stylesheet" href="http://dcoz.dc.gov/maps/ChangeMap/leaflet-control-geocoder-1.5.1/dist/Control.Geocoder.css" />
+<script src="http://dcoz.dc.gov/maps/ChangeMap/leaflet-control-geocoder-1.5.1/dist/Control.Geocoder.js"></script>
+	<script src="http://dcoz.dc.gov/maps/ChangeMap/2016.js"></script>
+    <!-- Make the map fill the entire page -->
+    <style>
+    #map {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+		z-index: -1;
+    }
+	    #legend {
+        position: fixed;
+		border: 1px solid #C0C0C0;
+		background-color:#DCDCDC;
+        bottom: 0;
+        left: 0;
+		height: 200px;
+		width:250px;
+		font-family:Helvetica, sans-serif;
+		font-size:12px;
+    }
+	
+	#imgbot{
+		width:75px;
+		position:fixed;
+		botton:2px;
+		lefth:0;
+	}
+	
+	a:link {
+		color:#C03;
+		text-decoration:none;
+	}
+	a:visited {
+		color:#C03;
+		text-decoration:none;
+	}
+	a:hover {
+		color:#FFFFFF;
+		text-decoration:none;
+	}
+	a:active {
+		color:#C03;
+		text-decoration:none;
+	}
+	
+	
+    </style>
+</head>
+
+<body>
+
+	<div id="legend">
+    <h3 style="padding-left:5px;color:#333">2016 Zone Change Viewer</h3>
+    <p style="padding-left:5px;padding-right:5px">Use this map to see how the Zoning Regulations of 1958 convert into the 2016 regulations. For more information please visit the <a href="http://handbook.dcoz.dc.gov">Zoning Handbook.</a></p>
+
+
+
+
+
+
+
+   <p> <a href="http://dcoz.dc.gov"><img id="imgbot" src="../assets/img/dcoz_logo.png" ></a></p>
+    
+    </div>
+    <div id="map"></div>
+    
+    <script>
+    var map = L.map('map').setView([38.9072, -77.0369], 13);
+
+    var myLayer3 = L.tileLayer('https://api.mapbox.com/styles/v1/holdenmt11/cir6ogmds000hbqm7ww153vjl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9sZGVubXQxMSIsImEiOiJYMXNtNE5RIn0.Gg7JM4pb0iiGUfEZrxnEYw').addTo(map);
+	
+	var myLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/holdenmt11/cir6n2vxg0000cmmes40rb63a/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9sZGVubXQxMSIsImEiOiJYMXNtNE5RIn0.Gg7JM4pb0iiGUfEZrxnEYw').addTo(map);
+	
+	
+
+	
+	L.control.sideBySide([myLayer1], [myLayer3]).addTo(map);
+	
+	function onEachFeature(feature, layer) {
+	var popupContent = "<p><b>Zone District</b></p>"+"<p>1958 Zoning: " + feature.properties.OLD_ZONING + "</p>"+ "<p>2016 Zoning: "+feature.properties.ZONING_LABEL+"</p>";
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.ZONING_LABEL) {
+        layer.bindPopup(popupContent);
+    }
+}
+var myStyle = {
+	"color":'#ffffff',
+	"opacity":0
+	};
+
+
+	
+	L.geoJson(zones, {
+    onEachFeature: onEachFeature,
+	style: myStyle
+}).addTo(map);
+
+L.Control.geocoder().addTo(map);
+    </script>
+</body>
+</html>
