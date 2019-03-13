@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html source="hidden" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>DC Office of Zoning - DCOZ</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="Description" content="District of Columbia Office of Zoning">
+<meta name="Keywords" content="Zoning, Office of Zoning, District of Columbia Government, Washington DC, D.C., District of Columbia, Government of the District of Columbia, DC Government, the District, City Government, e-government, electronic government, city agencies, community resources, DC Council, visitor information, Anthony Williams, Mayor Williams, Mayor's Office, Department of Public Works, News Advisories, Neighborhood Action, Human Services, Social Services, Our City Our Future, City of Access, Government Services, Nation's Capital, Public Works, Tony Williams, Service Provider, Tourism, community, culture, public affairs, press release, DC code, legislatione">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="must-revalidate">
+ <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/skins/blue.css">
+  <link rel="stylesheet" type="text/css" href="/css/dcmegamenu.css">
+<link rel="stylesheet" type="text/css" href="/onlineservices/dcoz-resources-page/assets/skeleton/css/skeleton.css">
+    <link rel="stylesheet" type="text/css" href="/onlineservices/dcoz-resources-page/assets/assets/resources.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.js"></script>
+ <script src="http://dcoz.dev.dc.gov/maps/ChangeMap/leaflet-side-by-side-gh-pages/leaflet-side-by-side.js"></script>
+ <link rel="stylesheet" href="http://dcoz.dev.dc.gov/maps/ChangeMap/leaflet-control-geocoder-1.5.1/dist/Control.Geocoder.css" />
+<script src="http://dcoz.dev.dc.gov/maps/ChangeMap/leaflet-control-geocoder-1.5.1/dist/Control.Geocoder.js"></script>
+	<script src="http://dcoz.dev.dc.gov/maps/ChangeMap/2016.js"></script>
+  <style>
+  .btn2 {
+                  background: #DB897D;
+                  background-image: -webkit-linear-gradient(top, #CC513F, #CC513F);
+                  background-image: -moz-linear-gradient(top, #CC513F, #CC513F);
+                  background-image: -ms-linear-gradient(top, #CC513F, #CC513F);
+                  background-image: -o-linear-gradient(top, #CC513F, #CC513F);
+                  background-image: linear-gradient(to bottom, #CC513F, #CC513F);
+                  -webkit-border-radius: 4;
+                  -moz-border-radius: 4;
+                  border-radius: 4px;
+                  -webkit-box-shadow: 0px 1px 3px #666666;
+                  -moz-box-shadow: 0px 1px 3px #666666;
+                  box-shadow: 0px 1px 3px #666666;
+                  font-family: Cambria !important;
+                  color: #ffffff !important;
+                  font-size: 16px !important;
+                  padding: 10px 20px 10px 20px;
+                  text-decoration: none;
+				  bottom: 0;
+                }
+
+                .btn2:hover {
+                  background: #19d1c8;
+                  color: #ffffff !important;
+                  background-image: -webkit-linear-gradient(top, #19d1c8, #448ab8);
+                  background-image: -moz-linear-gradient(top, #19d1c8, #448ab8);
+                  background-image: -ms-linear-gradient(top, #19d1c8, #448ab8);
+                  background-image: -o-linear-gradient(top, #19d1c8, #448ab8);
+                  background-image: linear-gradient(to bottom, #19d1c8, #448ab8);
+                  text-decoration: none;
+                }
+				 #map {
+        position: absolute;
+        top: 300px;
+        bottom: 50px;
+        left: 25px;
+        right: 25px;
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <title>Office of Zoning</title>
+</head>
+<body id="body">
+
+
+
+<table    class="tablewidth"   align="center" style="overflow: hidden;" cellpadding="0" cellspacing="0">
+			<!--#include virtual="/inc2/header.inc" -->
+			<tr>
+			<td colspan="2">
+			<div id="maincontent">
+			<br>
+				<div>
+				<table     class="tablewidth"   >
+					<tr>
+						<td class="blue" width="20%" style="vertical-align:top;align;left;display:none">
+							<!--  Left Menu-->
+							<!--  Left Menu-->
+						<!--#include virtual="/inc2/leftMenuOnlineServices.inc" -->
+						</td>
+						<td width="80%" align="center" class="maincontentsub" style="padding-left:30px;vertical-align:top;align:left;">
+						<!--  main body  -->
+						
+							
+							
+                            
+                        <div id="map"></div>
+    <script>
+    var map = L.map('map').setView([38.9072, -77.0369], 13);
+
+    var myLayer3 = L.tileLayer("https://api.mapbox.com/styles/v1/holdenmt11/cir6ogmds000hbqm7ww153vjl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9sZGVubXQxMSIsImEiOiJYMXNtNE5RIn0.Gg7JM4pb0iiGUfEZrxnEYw").addTo(map);
+	
+	var myLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/holdenmt11/cir6n2vxg0000cmmes40rb63a/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9sZGVubXQxMSIsImEiOiJYMXNtNE5RIn0.Gg7JM4pb0iiGUfEZrxnEYw').addTo(map);
+	
+	
+
+	
+	L.control.sideBySide([myLayer1], [myLayer3]).addTo(map);
+	
+	function onEachFeature(feature, layer) {
+	var popupContent = "<p><b>Zone District</b></p>"+"<p>1958 Zoning: " + feature.properties.OLD_ZONING + "</p>"+ "<p>2016 Zoning: "+feature.properties.ZONING_LABEL+"</p>";
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.ZONING_LABEL) {
+        layer.bindPopup(popupContent);
+    }
+}
+var myStyle = {
+	"color":'#ffffff',
+	"opacity":0
+	};
+
+
+	
+	L.geoJson(zones, {
+    onEachFeature: onEachFeature,
+	style: myStyle
+}).addTo(map);
+
+L.Control.geocoder().addTo(map);
+    </script>
+    
+    
+    </div>
+
+    
+    <p></p>
+	<p></p>
+	<p></p>
+    
+        
+                            
+                            
+							
+                            <br><br>
+						
+						</td>
+	<tr><td colspan="2">
+						<!--  Footer-->
+						<!--#include virtual="/inc2/footer.inc" -->
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

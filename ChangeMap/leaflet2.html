@@ -1,0 +1,56 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Esri Leaflet Quickstart</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet-src.js"></script>
+  <script src="C:\Users\mholden\Downloads\leaflet-side-by-side-gh-pages\leaflet-side-by-side-gh-pages\leaflet-side-by-side.js"></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://cdn.jsdelivr.net/leaflet.esri/2.0.1/esri-leaflet.js"></script>
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+	#range {
+			width: 100%;
+		}
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<script>
+var map = L.map('map').setView([38.9072, -77.0369], 12);
+
+
+
+
+
+var myLayer3 = L.esri.basemapLayer("Streets").addTo(map);
+var zone1 = new L.layerGroup().addTo(map);
+var myLayer2 = L.esri.dynamicMapLayer({
+  url: 'http://maps2.dcgis.dc.gov/dcgis/rest/services/Zoning_WebMercator/MapServer',
+  
+	}).addTo(zone1);
+	var zone3 = new L.layerGroup().addTo(map);
+var myLayer5 = L.esri.dynamicMapLayer({
+  url: 'http://maps2.dcgis.dc.gov/dcgis/rest/services/newOwnerPly_WebMercator/MapServer',
+  
+	}).addTo(zone3);
+	var myLayer1 = L.esri.basemapLayer("Topographic").addTo(map);
+
+	var zones = {
+	"2016 Zones":zone1
+	};
+	
+	L.control.sideBySide([zone1,myLayer1], [zone3,myLayer3]).addTo(map);
+
+
+</script>
+
+</body>
+</html>

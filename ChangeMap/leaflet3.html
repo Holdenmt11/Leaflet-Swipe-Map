@@ -1,0 +1,86 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Esri Leaflet Quickstart</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/leaflet/1.0.0-rc.1/leaflet-src.js"></script>
+  <script src="C:\Users\mholden\Downloads\leaflet-side-by-side-gh-pages\leaflet-side-by-side-gh-pages\leaflet-side-by-side.js"></script>
+  <script src="C:\Users\mholden\Downloads\leaflet-side-by-side-gh-pages\2016.js"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet.esri.geocoder/2.1.1/esri-leaflet-geocoder.css">
+    <script src="https://cdn.jsdelivr.net/leaflet.esri.geocoder/2.1.1/esri-leaflet-geocoder.js"></script>
+
+
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://cdn.jsdelivr.net/leaflet.esri/2.0.1/esri-leaflet.js"></script>
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+	
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<script>
+var map = L.map('map').setView([38.9072, -77.0369], 13);
+
+
+
+
+var myLayer3 = L.tileLayer('https://api.mapbox.com/styles/v1/holdenmt11/cir6ogmds000hbqm7ww153vjl/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9sZGVubXQxMSIsImEiOiJYMXNtNE5RIn0.Gg7JM4pb0iiGUfEZrxnEYw').addTo(map);
+/*
+	var myLayer1 = L.tileLayer('https://api.mapbox.com/styles/v1/holdenmt11/cir6n2vxg0000cmmes40rb63a/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaG9sZGVubXQxMSIsImEiOiJYMXNtNE5RIn0.Gg7JM4pb0iiGUfEZrxnEYw').addTo(map);
+
+	
+	
+	L.control.sideBySide([myLayer1], [myLayer3]).addTo(map);
+
+	function onEachFeature(feature, layer) {
+	var popupContent = "<p><b>DC Zoning</b></p>"+"<p>1958 Zoning: " + feature.properties.OLD_ZONING + "</p>"+ "<p>2016 Zoning: "+feature.properties.ZONING_LABEL+"</p>";
+    // does this feature have a property named popupContent?
+    if (feature.properties && feature.properties.ZONING_LABEL) {
+        layer.bindPopup(popupContent);
+    }
+}
+var myStyle = {
+	"color":'#ffffff',
+	"opacity":0
+	};
+
+
+	
+	L.geoJson(zones, {
+    onEachFeature: onEachFeature,
+	style: myStyle
+}).addTo(map);
+*/
+var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
+
+    // create the geocoding control and add it to the map
+    var searchControl = L.esri.Geocoding.geosearch({
+        providers: [arcgisOnline]
+    }).addTo(map);
+
+    // create an empty layer group to store the results and add it to the map
+    var results = L.layerGroup().addTo(map);
+
+    // listen for the results event and add every result to the map
+    searchControl.on("results", function(data) {
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            results.addLayer(L.marker(data.results[i].latlng));
+        }
+    });
+
+
+
+
+</script>
+
+</body>
+</html>

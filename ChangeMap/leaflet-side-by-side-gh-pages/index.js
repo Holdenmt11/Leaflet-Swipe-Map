@@ -45,9 +45,7 @@ function asArray (arg) {
   return (arg === 'undefined') ? [] : Array.isArray(arg) ? arg : [arg]
 }
 
-function noop () {
-  return
-}
+function noop () {}
 
 L.Control.SideBySide = L.Control.extend({
   options: {
@@ -69,7 +67,7 @@ L.Control.SideBySide = L.Control.extend({
 
   setPosition: noop,
 
-  includes: L.Mixin.Events,
+  includes: L.Evented.prototype || L.Mixin.Events,
 
   addTo: function (map) {
     this.remove()
@@ -93,6 +91,12 @@ L.Control.SideBySide = L.Control.extend({
   remove: function () {
     if (!this._map) {
       return this
+    }
+    if (this._leftLayer) {
+      this._leftLayer.getContainer().style.clip = ''
+    }
+    if (this._rightLayer) {
+      this._rightLayer.getContainer().style.clip = ''
     }
     this._removeEvents()
     L.DomUtil.remove(this._container)
@@ -168,8 +172,8 @@ L.Control.SideBySide = L.Control.extend({
     map.on('move', this._updateClip, this)
     map.on('layeradd layerremove', this._updateLayers, this)
     on(range, getRangeEvent(range), this._updateClip, this)
-    on(range, 'mousedown touchstart', cancelMapDrag, this)
-    on(range, 'mouseup touchend', uncancelMapDrag, this)
+    on(range, L.Browser.touch ? 'touchstart' : 'mousedown', cancelMapDrag, this)
+    on(range, L.Browser.touch ? 'touchend' : 'mouseup', uncancelMapDrag, this)
   },
 
   _removeEvents: function () {
@@ -177,8 +181,8 @@ L.Control.SideBySide = L.Control.extend({
     var map = this._map
     if (range) {
       off(range, getRangeEvent(range), this._updateClip, this)
-      off(range, 'mousedown touchstart', cancelMapDrag, this)
-      off(range, 'mouseup touchend', uncancelMapDrag, this)
+      off(range, L.Browser.touch ? 'touchstart' : 'mousedown', cancelMapDrag, this)
+      off(range, L.Browser.touch ? 'touchend' : 'mouseup', uncancelMapDrag, this)
     }
     if (map) {
       map.off('layeradd layerremove', this._updateLayers, this)
